@@ -26,7 +26,7 @@ function unconjugateRecursive(word, form, path) {
   }
 
   var finishedPaths = [];
-  
+
   for (let rule of rules) {
     if ((form == 0 || form == rule[0]) && word.endsWith(rule[1])) {
 
@@ -37,6 +37,10 @@ function unconjugateRecursive(word, form, path) {
             (prev[0] == 41 && form == 114 && rule[2] == 14) ||
             (prev[0] == 48 && form == 114 && rule[2] == 9)) { 
           continue; 
+        }
+      } else {
+        if (rule[1] == rule[3]) {
+          continue;
         }
       }
 
