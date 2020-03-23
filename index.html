@@ -91,6 +91,13 @@ function present(word, form, prev) {
       });
     }
   }
+  
+  if (options.children.length == 0) {
+    const url = 'https://jisho.org/search/' + word;
+    addButton('Lookup', 'Stem:', '', function() {
+      window.open(url, '_blank');
+    });
+  }
 }
 
 function go() {
