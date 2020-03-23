@@ -6,8 +6,8 @@
   </head>
   <body>
     <h1>Grammar Sensei</h1>
-    <textarea id="input">学生じゃなくて</textarea>
-    <button type="button" onclick="analyze()">Analyze</button>
+    <textarea id="input" style="height: 50px; width: 300px;">学生じゃなくて</textarea>
+    <button type="button" onclick="explain()" style="display: block; margin: 20px;">Explain</button>
     <div id="output"></div>
     <script>
 
@@ -58,7 +58,7 @@ function unconjugateRecursive(word, form, path) {
 const input = document.getElementById('input');
 const output = document.getElementById('output');
 
-function analyze() {
+function explain() {
   const word = input.value;
   const paths = unconjugateRecursive(word, 0, []);
   const sortedPaths = paths.sort((a,b) => a.length < b.length);
