@@ -58,16 +58,6 @@ function addButton(title, ltext, rtext, callback) {
   options.appendChild(button);
 }
 
-function allowed(form, rule, prev) {
-  if ((prev[0] == 10 && form == 111 && rule[2] == 22) ||
-      (prev[0] == 19 && form == 112 && rule[2] == 116) ||
-      (prev[0] == 41 && form == 114 && rule[2] == 14) ||
-      (prev[0] == 48 && form == 114 && rule[2] == 9)) {
-    return false; 
-  }
-  return true;
-}
-
 function present(word, form, prev) {
   for (let rule of rules) {
     if (rule[0] == form && word.endsWith(rule[1])) {
