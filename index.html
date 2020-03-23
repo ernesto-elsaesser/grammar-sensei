@@ -61,6 +61,7 @@ const output = document.getElementById('output');
 function analyze() {
   const word = input.value;
   const paths = unconjugateRecursive(word, 0, []);
+  const sortedPaths = paths.sort((a,b) => a.length < b.length);
   var html = '';
   for (let path of paths) {
     var w = word;
