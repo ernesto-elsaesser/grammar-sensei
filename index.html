@@ -21,7 +21,7 @@ function applyRule(word, rule) {
 
 function unconjugateRecursive(word, form, path) {
 
-  if (form == 111 || form == 112) { // godan or ichidan verb
+  if ([62, 111,  112].includes(form)) { // godan or ichidan verb
     return [path];
   }
 
