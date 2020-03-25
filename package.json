@@ -1,0 +1,10 @@
+{
+  "name": "grammar-sensei",
+  "version": "0.0.1",
+  "scripts": {
+    "gen": "node generate.js"
+  },
+  "dependencies": {
+    "jp_verb": "git+https://git@github.com/mistval/jp-verb-deconjugator.git"
+  }
+}
