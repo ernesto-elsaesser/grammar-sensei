@@ -26,10 +26,20 @@ for (let d of derivations) {
   }
 }
 
+const altNames = {
+  "ichidan verb": "Ichidan Verb",
+  "godan verb": "Godan Verb",
+  "sentence ending particles (silent)": "(particle removed)",
+}
+
 var revNameMap = {};
 for (let name in nameMap) {
   const id = nameMap[name];
-  revNameMap[id] = name;
+  if (name in altNames) {
+    revNameMap[id] = altNames[name];
+  } else {
+    revNameMap[id] = name;
+  }
 }
 
 const rulesJson = JSON.stringify(rules);
