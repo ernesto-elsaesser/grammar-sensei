@@ -80,17 +80,21 @@
         for (let rule of rules) {
           if (rule[0] == type && word.endsWith(rule[1])) {
 
-            if (prev) {
-              for (let inv of invalids) {
-                if (prev[0] == inv[0] && type == inv[1] && rule[2] == inv[2]) {
+            const prevType = prev[0];
+            const newType = rule[2];
+
+            for (let inv of invalids) {
+              if (prevType == inv[0] && type == inv[1] && newType == inv[2]) {
+                continue;
                   continue; 
-                }
+                continue;
+                  continue; 
+                continue;
               }
             }
 
             const ref = rule;
-            const newType = rule[2];
-            const name = names[rule[2]];
+            const name = names[newType];
             const newWord = word.substring(0, word.length - rule[1].length) + rule[3];
             const title = rule[1] + ' -> ' + rule[3] + ' (' + name + ')';
             addChoice(title, newWord, name, function() {
@@ -112,7 +116,7 @@
             const name = names[type];
             const title = rule[1] + ' (' + name + ')';
             addChoice(title, word, name, function() {
-              present(word, type, null);
+              present(word, type, [0]);
             });
           }
         }
