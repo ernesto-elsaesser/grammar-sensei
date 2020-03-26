@@ -111,7 +111,7 @@
         const word = input.value;
 
         for (let rule of rules) {
-          if (rule[1] != rule[3] && word.endsWith(rule[1])) {
+          if (rule[1] != rule[3] && rule[1] != '' && word.endsWith(rule[1])) {
             const type = rule[0];
             const name = names[type];
             const title = rule[1] + ' (' + name + ')';
