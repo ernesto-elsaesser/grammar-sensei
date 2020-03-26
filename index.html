@@ -12,9 +12,12 @@
   <body>
     <h1>Grammar Sensei</h1>
     <br />
-    Predicate:&nbsp;&nbsp;<input type="text" id="input" style="width: 200px" />
-    <button type="button" onclick="clr()">X</button>
-    <button type="button" onclick="go()">Go</button>
+    <form onsubmit="go(event)">
+      <label for="predicate">Predicate:</label>&nbsp;
+      <input type="text" id="predicate" style="width: 200px" />&nbsp;
+      <input type="reset">
+      <input type="submit" value="Go">
+    </form>
     <br />
     <br />
     <br />
@@ -32,7 +35,7 @@
 
     <script src="data.js"></script>
     <script>
-      const input = document.getElementById('input');
+      const predicate = document.getElementById('predicate');
       const buttons = document.getElementById('buttons');
       const choices = document.getElementById('choices');
 
@@ -105,10 +108,11 @@
         
       }
 
-      function go() {
+      function go(event) {
+        event.preventDefault();
         buttons.innerHTML = '';
         choices.innerHTML = '';
-        const word = input.value;
+        const word = predicate.value;
 
         for (let rule of rules) {
           if (rule[1] != rule[3] && rule[1] != '' && word.endsWith(rule[1])) {
@@ -120,10 +124,7 @@
             });
           }
         }
-      }
-
-      function clr() {
-        input.value = '';
+        return true;
       }
     </script>
   </body>
