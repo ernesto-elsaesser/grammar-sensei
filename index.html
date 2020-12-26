@@ -76,7 +76,7 @@ function update(mode) {
 
         var button = document.createElement('button');
         button.type = 'button';
-        button.innerText = curWord + ' [' + fromType + '] -> ' + newWord + ' [' + toType + ']';
+        button.innerText = from + ' (' + fromType + ') -> ' + to + ' (' + toType + ')';
         button.onclick = function() {
             appliedRules.push(rule);
             update();
