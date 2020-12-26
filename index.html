@@ -72,8 +72,6 @@ function update(mode) {
             continue;
         }
 
-        const newWord = curWord.substring(0, curWord.length - from.length) + to;
-
         var button = document.createElement('button');
         button.type = 'button';
         button.innerText = from + ' (' + fromType + ') -> ' + to + ' (' + toType + ')';
