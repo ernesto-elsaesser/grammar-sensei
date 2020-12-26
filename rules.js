@@ -62,10 +62,30 @@ const rules = [
   {unconjugatedEnding: 'で', conjugatedEnding: 'でる', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'SHORT_IRU'},
   {unconjugatedEnding: 'て', conjugatedEnding: 'てある', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'ARU'},
   {unconjugatedEnding: 'で', conjugatedEnding: 'である', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'ARU'},
+  {unconjugatedEnding: 'て', conjugatedEnding: 'てくる', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'TE_KURU'},
+  {unconjugatedEnding: 'で', conjugatedEnding: 'でくる', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'TE_KURU'},
+  {unconjugatedEnding: 'て', conjugatedEnding: 'ていく', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'TE_IKU'},
+  {unconjugatedEnding: 'で', conjugatedEnding: 'でいく', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'TE_IKU'},
+  {unconjugatedEnding: 'て', conjugatedEnding: 'てく', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'TE_IKU'},
+  {unconjugatedEnding: 'で', conjugatedEnding: 'でく', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'TE_IKU'},
   {unconjugatedEnding: 'て', conjugatedEnding: 'てすまない', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'SUMANAI'},
   {unconjugatedEnding: 'で', conjugatedEnding: 'ですまない', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'SUMANAI'},
 
+  {unconjugatedEnding: 'て', conjugatedEnding: 'てくる', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'TE_KURU'},
+  {unconjugatedEnding: 'で', conjugatedEnding: 'でくる', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'TE_KURU'},
+
   {unconjugatedEnding: 'すまない', conjugatedEnding: 'すみません', unconjugatedWordType: 'SUMANAI', conjugatedWordType: 'SUMIMASEN'},
+    
+  {unconjugatedEnding: 'いく', conjugatedEnding: 'いった', unconjugatedWordType: 'TE_IKU', conjugatedWordType: 'PLAIN_PAST'},
+  {unconjugatedEnding: 'いく', conjugatedEnding: 'いく', unconjugatedWordType: 'TE_IKU', conjugatedWordType: 'GODAN_VERB'},
+
+  {unconjugatedEnding: 'くる', conjugatedEnding: 'きた', unconjugatedWordType: 'TE_KURU', conjugatedWordType: 'PLAIN_PAST'},
+  {unconjugatedEnding: 'くる', conjugatedEnding: 'こい', unconjugatedWordType: 'TE_KURU', conjugatedWordType: 'IMPERATIVE'},
+  {unconjugatedEnding: 'くる', conjugatedEnding: 'こない', unconjugatedWordType: 'TE_KURU', conjugatedWordType: 'NEGATIVE_NAI_VERB'},
+  {unconjugatedEnding: 'くる', conjugatedEnding: 'こよう', unconjugatedWordType: 'TE_KURU', conjugatedWordType: 'VOLITIONAL'},
+  {unconjugatedEnding: 'くる', conjugatedEnding: 'こさせる', unconjugatedWordType: 'TE_KURU', conjugatedWordType: 'CAUSATIVE'},
+  {unconjugatedEnding: 'くる', conjugatedEnding: 'こよう', unconjugatedWordType: 'TE_KURU', conjugatedWordType: 'VOLITIONAL'},
+  {unconjugatedEnding: 'くる', conjugatedEnding: 'き', unconjugatedWordType: 'TE_KURU', conjugatedWordType: 'MASU_STEM'},
 
   // Potentional form
   {unconjugatedEnding: 'う', conjugatedEnding: 'える', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'POTENTIAL'},
@@ -155,6 +175,9 @@ const rules = [
   {unconjugatedEnding: 'する', conjugatedEnding: 'される', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'PASSIVE'},
   {unconjugatedEnding: 'する', conjugatedEnding: 'しろ', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'IMPERATIVE'},
   {unconjugatedEnding: 'する', conjugatedEnding: 'せよ', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'IMPERATIVE'},
+
+  // KURU
+  {unconjugatedEnding: '来る', conjugatedEnding: '来い', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'IMPERATIVE'},
 
   // Da rules
   {unconjugatedEnding: 'だ', conjugatedEnding: 'です', unconjugatedWordType: 'DA', conjugatedWordType: 'POLITE_DESU_VERB'},
