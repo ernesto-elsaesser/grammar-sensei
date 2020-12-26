@@ -1,3 +1,5 @@
+// based on https://github.com/mistval/jp-verb-deconjugator/blob/master/derivations.js
+
 const rules = [
 
   // Negative
@@ -48,6 +50,8 @@ const rules = [
   {unconjugatedEnding: 'る', conjugatedEnding: 'って', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'TE_FORM'},
   {unconjugatedEnding: 'る', conjugatedEnding: 'て', unconjugatedWordType: 'ICHIDAN_VERB', conjugatedWordType: 'TE_FORM'},
 
+  {unconjugatedEnding: 'て', conjugatedEnding: 'てござい', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'GOZAI'},
+  {unconjugatedEnding: 'で', conjugatedEnding: 'でござい', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'GOZAI'},
   {unconjugatedEnding: 'て', conjugatedEnding: 'てください', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'KUDASAI'},
   {unconjugatedEnding: 'で', conjugatedEnding: 'でください', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'KUDASAI'},
   {unconjugatedEnding: 'て', conjugatedEnding: 'てない', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'NEGATIVE_ARU_OR_IRU'},
@@ -60,8 +64,6 @@ const rules = [
   {unconjugatedEnding: 'で', conjugatedEnding: 'である', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'ARU'},
   {unconjugatedEnding: 'て', conjugatedEnding: 'てすまない', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'SUMANAI'},
   {unconjugatedEnding: 'で', conjugatedEnding: 'ですまない', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'SUMANAI'},
-  {unconjugatedEnding: 'て', conjugatedEnding: 'てござい', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'GOZAI'},
-  {unconjugatedEnding: 'で', conjugatedEnding: 'でござい', unconjugatedWordType: 'TE_FORM', conjugatedWordType: 'GOZAI'},
 
   {unconjugatedEnding: 'すまない', conjugatedEnding: 'すみません', unconjugatedWordType: 'SUMANAI', conjugatedWordType: 'SUMIMASEN'},
 
@@ -69,7 +71,7 @@ const rules = [
   {unconjugatedEnding: 'う', conjugatedEnding: 'える', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'POTENTIAL'},
   {unconjugatedEnding: 'く', conjugatedEnding: 'ける', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'POTENTIAL'},
   {unconjugatedEnding: 'ぐ', conjugatedEnding: 'げる', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'POTENTIAL'},
-  {unconjugatedEnding: 'す', conjugatedEnding: 'せる', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'POTENTIAL', cannotFollow: [['SHORTENED_CAUSATIVE', 'GODAN_VERB']]},
+  {unconjugatedEnding: 'す', conjugatedEnding: 'せる', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'POTENTIAL'},
   {unconjugatedEnding: 'つ', conjugatedEnding: 'てる', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'POTENTIAL'},
   {unconjugatedEnding: 'ぬ', conjugatedEnding: 'ねる', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'POTENTIAL'},
   {unconjugatedEnding: 'ぶ', conjugatedEnding: 'べる', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'POTENTIAL'},
@@ -112,7 +114,7 @@ const rules = [
   {unconjugatedEnding: 'る', conjugatedEnding: 'よう', unconjugatedWordType: 'ICHIDAN_VERB', conjugatedWordType: 'VOLITIONAL'},
 
   // Masu stem form
-  {unconjugatedEnding: 'る', conjugatedEnding: '', unconjugatedWordType: 'ICHIDAN_VERB', conjugatedWordType: 'MASU_STEM', cannotFollow: [['SHORT_IRU', 'ICHIDAN_VERB']]},
+  {unconjugatedEnding: 'る', conjugatedEnding: '', unconjugatedWordType: 'ICHIDAN_VERB', conjugatedWordType: 'MASU_STEM'},
   {unconjugatedEnding: 'う', conjugatedEnding: 'い', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'MASU_STEM'},
   {unconjugatedEnding: 'く', conjugatedEnding: 'き', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'MASU_STEM'},
   {unconjugatedEnding: 'ぐ', conjugatedEnding: 'ぎ', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'MASU_STEM'},
@@ -142,8 +144,6 @@ const rules = [
   {unconjugatedEnding: 'む', conjugatedEnding: 'ませる', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'CAUSATIVE'},
   {unconjugatedEnding: 'る', conjugatedEnding: 'らせる', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'CAUSATIVE'},
   {unconjugatedEnding: 'る', conjugatedEnding: 'させる', unconjugatedWordType: 'ICHIDAN_VERB', conjugatedWordType: 'CAUSATIVE'},
-
-  {unconjugatedEnding: 'せる', conjugatedEnding: 'す', unconjugatedWordType: 'CAUSATIVE', conjugatedWordType: 'SHORTENED_CAUSATIVE'},
 
   // SURU
   {unconjugatedEnding: 'する', conjugatedEnding: 'し', unconjugatedWordType: 'GODAN_VERB', conjugatedWordType: 'MASU_STEM'},

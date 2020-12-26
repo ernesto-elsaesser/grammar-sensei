@@ -1,131 +1,94 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Grammar Sensei</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      * { font-size: 14px; }
-      h1 { font-size: 24px; }
-    </style>
-  </head>
-  <body>
-    <h1>Grammar Sensei</h1>
-    <br />
-    <form onsubmit="go(event)">
-      <label for="predicate">Predicate:</label>&nbsp;
-      <input type="text" id="predicate" style="width: 200px" />&nbsp;
-      <input type="reset" value="X">
-      <input type="submit" value="Go">
-    </form>
-    <br />
-    <br />
-    <br />
-    <table>
-      <colgroup>
-        <col span="1" style="width: 40px;">
-        <col span="1" style="width: 200px;">
-        <col span="1">
-      </colgroup>
-      <tbody id="choices"></tbody>
-    </table>
-    <br />
-    <br />
-    <div id="buttons"></div>
+    <head>
+        <meta charset="utf-8">
+        <title>Grammar Sensei</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+* { font-size: 14px; }
+h1 { font-size: 24px; }
+button { margin-left: 5px }
+div { margin: 10px 0; }
+        </style>
+    </head>
+    <body>
+        <h1>Grammar Sensei</h1>
+        <input type="text" placeholder="Predicate" id="predicate" style="width: 200px" />
+        <button type="button" onclick="update(2)">START</button>
+        <button type="button" onclick="update(1)">BACK</button>
+        <div id="steps"></div>
+        <div id="options"></div>
 
-    <script src="data.js"></script>
-    <script>
-      const predicate = document.getElementById('predicate');
-      const buttons = document.getElementById('buttons');
-      const choices = document.getElementById('choices');
+        <script src="rules.js"></script>
+        <script>
 
-      function makeButton(title, callback) {
+var appliedRules;
+
+function update(mode) {
+
+    if (mode == 1) {
+        appliedRules.pop();
+    }
+    else if (mode == 2) {
+        appliedRules = [];
+    }
+
+    const predicate = document.getElementById('predicate');
+    var curWord = predicate.value;
+    var curType = null;
+
+    const steps = document.getElementById('steps');
+    steps.innerHTML = lookupLink(curWord) + '<br>';
+
+    for (let rule of appliedRules) {
+        const from = rule['conjugatedEnding'];
+        const to = rule['unconjugatedEnding'];
+        const fromType = rule['conjugatedWordType'];
+        const toType = rule['unconjugatedWordType'];
+
+        curWord = curWord.substring(0, curWord.length - from.length) + to;
+        curType = toType;
+
+        steps.innerHTML += fromType + ' -> ' + toType + '<br>';
+        steps.innerHTML += lookupLink(curWord) + '<br>';
+    }
+
+    const options = document.getElementById('options');
+    options.innerHTML = '';
+
+    for (let rule of rules) {
+        const from = rule['conjugatedEnding'];
+        const to = rule['unconjugatedEnding'];
+        const fromType = rule['conjugatedWordType'];
+        const toType = rule['unconjugatedWordType'];
+
+        if (curType) {
+            if (fromType != curType) { continue; }
+        } else {
+            if (from == to || from == '') { continue; }
+        }
+
+        if (!curWord.endsWith(from)) {
+            continue;
+        }
+
+        const newWord = curWord.substring(0, curWord.length - from.length) + to;
+
         var button = document.createElement('button');
         button.type = 'button';
-        button.innerText = title;
-        button.onclick = callback;
-        return button;
-      }
-
-      function makeRow(word, description) {
-        var row = document.createElement('tr');
-
-        var col1 = document.createElement('td');
-        var lookup = makeButton('?', function() {
-          const url = 'https://jisho.org/search/' + word;
-          window.open(url, '_blank');
-        });
-        col1.appendChild(lookup);
-        row.appendChild(col1);
-
-        var col2 = document.createElement('td');
-        col2.innerText = word;
-        row.appendChild(col2);
-
-        var col3 = document.createElement('td');
-        col3.innerText = description;
-        row.appendChild(col3);
-
-        return row;
-      }
-
-      function addChoice(title, word, description, callback) {
-        const button = makeButton(title, function() {
-          const row = makeRow(word, description);
-          choices.insertBefore(row, choices.firstChild);
-          buttons.innerHTML = '';
-          callback();
-        });
-        buttons.appendChild(button);
-      }
-
-      function present(word, type, prev) {
-        for (let rule of rules) {
-          if (rule[0] == type && word.endsWith(rule[1])) {
-
-            const prevType = prev[0];
-            const newType = rule[2];
-
-            for (let inv of invalids) {
-              if (prevType == inv[0] && type == inv[1] && newType == inv[2]) {
-                continue;
-                  continue; 
-                continue;
-                  continue; 
-                continue;
-              }
-            }
-
-            const ref = rule;
-            const name = names[newType];
-            const newWord = word.substring(0, word.length - rule[1].length) + rule[3];
-            const title = rule[1] + ' -> ' + rule[3] + ' (' + name + ')';
-            addChoice(title, newWord, name, function() {
-              present(newWord, newType, ref);
-            });
-          }
+        button.innerText = curWord + ' [' + fromType + '] -> ' + newWord + ' [' + toType + ']';
+        button.onclick = function() {
+            appliedRules.push(rule);
+            update();
         }
-        
-      }
+        options.appendChild(button);
+    }
+}
 
-      function go(event) {
-        event.preventDefault();
-        buttons.innerHTML = '';
-        choices.innerHTML = '';
-        const word = predicate.value;
+function lookupLink(word) {
+    return '<a href="https://jisho.org/search/' + word + '">' + word + '</a>';
+}
 
-        for (let rule of rules) {
-          if (rule[1] != rule[3] && rule[1] != '' && word.endsWith(rule[1])) {
-            const type = rule[0];
-            const name = names[type];
-            const title = rule[1] + ' (' + name + ')';
-            addChoice(title, word, name, function() {
-              present(word, type, [0]);
-            });
-          }
-        }
-        return true;
-      }
-    </script>
-  </body>
+        </script>
+    </body>
 </html>
